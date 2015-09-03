@@ -11,6 +11,7 @@ class Whois
     private $subDomain;
 
     private $servers;
+    private $overrideServer;
 
     /**
      * @param string $domain full domain name (without trailing dot)
@@ -31,11 +32,19 @@ class Whois
         $this->servers = json_decode(file_get_contents( __DIR__.'/whois.servers.json' ), true);
     }
 
+    public overrideServer($server){
+      $this->overrideServer = $server;
+    }
+
     public function info()
     {
         if ($this->isValid()) {
             $whois_server = $this->servers[$this->TLDs][0];
 
+            if ($this->overrideServer !=null){
+              $whois_server = $this->overrideServer;
+            }
+            
             // If TLDs have been found
             if ($whois_server != '') {
 
