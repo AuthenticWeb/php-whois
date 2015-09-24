@@ -32,7 +32,7 @@ class Whois
         $this->servers = json_decode(file_get_contents( __DIR__.'/whois.servers.json' ), true);
     }
 
-    public overrideServer($server){
+    public function overrideServer($server){
       $this->overrideServer = $server;
     }
 
@@ -44,7 +44,7 @@ class Whois
             if ($this->overrideServer !=null){
               $whois_server = $this->overrideServer;
             }
-            
+
             // If TLDs have been found
             if ($whois_server != '') {
 
